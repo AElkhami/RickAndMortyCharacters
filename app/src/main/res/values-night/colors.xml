@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_color">#24282F</color>
+    <color name="rounded_corner_bg_color">#3C3E44</color>
+    <color name="main_text_color">#F5F5F5</color>
+</resources>
