@@ -10,7 +10,7 @@
     <color name="basic_green">#44BA0D</color>
     <color name="basic_red">#F44336</color>
     <color name="background_color">#A0B8C2</color>
-    <color name="rounded_corner_bg_color">#ffffff</color>
+    <color name="rounded_corner_bg_color">#E2E4E4</color>
     <color name="main_text_color">#FF000000</color>
     <color name="secondary_text_color">#9E9E9E</color>
 </resources>
