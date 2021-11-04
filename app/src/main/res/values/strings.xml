@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RickAndMortyCharacters</string>
+    <string name="app_name">Rick and Morty Characters</string>
     <string name="character_image">Character image.</string>
     <string name="last_known_location">Last known location:</string>
     <string name="first_seen_in">First seen in:</string>

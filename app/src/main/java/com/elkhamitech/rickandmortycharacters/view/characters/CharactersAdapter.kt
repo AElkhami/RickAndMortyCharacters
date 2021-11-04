@@ -1,17 +1,26 @@
 package com.elkhamitech.rickandmortycharacters.view.characters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.elkhamitech.rickandmortycharacters.R
 import com.elkhamitech.rickandmortycharacters.data.model.Character
 import com.elkhamitech.rickandmortycharacters.databinding.ItemCharacterBinding
+import javax.inject.Inject
 
 /**
  * Created by A.Elkhami on 01,November,2021
  */
-class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(DiffUtilCallback()) {
+class CharactersAdapter :
+    ListAdapter<Character, CharactersAdapter.ViewHolder>(DiffUtilCallback()) {
 
     class ViewHolder private constructor(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -21,6 +30,7 @@ class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(D
         }
 
         companion object {
+
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCharacterBinding.inflate(
@@ -28,6 +38,28 @@ class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(D
                     parent, false
                 )
                 return ViewHolder(binding)
+            }
+
+            @JvmStatic
+            @BindingAdapter("imageUrl")
+            fun setImageUrl(imgView: ImageView, imgUrl: String?) {
+                Glide.with(imgView.context).load(imgView).load(imgUrl).into(imgView)
+            }
+
+            @JvmStatic
+            @BindingAdapter("characterStatus")
+            fun setCharacterStatus(view: View, status: String) {
+                when {
+                    status.equals("alive", ignoreCase = true) -> {
+                        view.setBackgroundResource(R.drawable.green_circle)
+                    }
+                    status.equals("dead", ignoreCase = true) -> {
+                        view.setBackgroundResource(R.drawable.red_circle)
+                    }
+                    else -> {
+                        view.setBackgroundResource(R.drawable.yellow_circle)
+                    }
+                }
             }
         }
     }

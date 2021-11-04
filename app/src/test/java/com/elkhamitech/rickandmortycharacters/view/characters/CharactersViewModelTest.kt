@@ -38,7 +38,7 @@ class CharactersViewModelTest {
     fun `get first page characters, returns success`() = runBlockingTest {
         viewModel.getCharacters(pageNumber = 1)
 
-        assertThat(viewModel.charactersList.value).isEqualTo(CharactersStub.characters.results)
+        assertThat(viewModel.uiStateFlow.value.characters).isEqualTo(CharactersStub.characters.results)
     }
 
     @Test
@@ -47,7 +47,7 @@ class CharactersViewModelTest {
 
         viewModel.getCharacters(pageNumber = 1)
 
-        assertThat(viewModel.errorMessage.value).isEqualTo("error")
+        assertThat(viewModel.uiStateFlow.value.message).isEqualTo("error")
     }
 
 

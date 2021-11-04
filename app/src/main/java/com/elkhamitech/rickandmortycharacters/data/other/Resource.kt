@@ -6,10 +6,10 @@ package com.elkhamitech.rickandmortycharacters.data.other
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null,
-    val status: Status? = null
+    val status: Status
 ) {
     class Success<T>(data: T) : Resource<T>(data = data, status = Status.SUCCESS)
-    class Loading<T>(data: T? = null) : Resource<T>(data = data, status = Status.LOADING)
+    class Loading<T>() : Resource<T>(status = Status.LOADING)
     class Error<T>(data: T? = null, message: String) :
         Resource<T>(data = data, message = message, status = Status.FAILED)
 }

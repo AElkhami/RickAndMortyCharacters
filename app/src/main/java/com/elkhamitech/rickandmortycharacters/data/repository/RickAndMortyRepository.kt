@@ -13,7 +13,11 @@ class RickAndMortyRepository @Inject constructor(
 ) : Repository {
 
     override suspend fun getRickAndMortyCharacters(pageNumber: Int): Resource<Characters> {
+
+        Resource.Loading<Characters>()
+
         val response = api.getAllCharacters(pageNumber)
+
         if (response.isSuccessful) {
             response.body()?.let { characters ->
                 return Resource.Success(characters)

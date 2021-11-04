@@ -2,23 +2,20 @@ package com.elkhamitech.rickandmortycharacters.view.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elkhamitech.rickandmortycharacters.data.model.Character
 import com.elkhamitech.rickandmortycharacters.data.other.Status
 import com.elkhamitech.rickandmortycharacters.data.repository.Repository
+import com.elkhamitech.rickandmortycharacters.view.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CharactersViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class CharactersViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _charactersList = MutableStateFlow<List<Character>>(listOf())
-    var charactersList = _charactersList.asStateFlow()
-
-    private val _errorMessage = MutableStateFlow(String())
-    var errorMessage = _errorMessage.asStateFlow()
-
-    private val _loadingState = MutableStateFlow(false)
-    var loadingState = _loadingState.asStateFlow()
+    private val _uiState = MutableStateFlow(UiState(isLoading = true))
+    var uiStateFlow = _uiState.asStateFlow()
 
     fun getCharacters(pageNumber: Int) {
         viewModelScope.launch {
@@ -27,18 +24,35 @@ class CharactersViewModel(private val repository: Repository) : ViewModel() {
             when (response.status) {
                 Status.SUCCESS -> {
                     response.data?.let { characters ->
-                        _charactersList.value = characters.results
+                        _uiState.value = UiState(
+                            characters = characters.results,
+                            isLoading = false
+                        )
+                    } ?: run {
+                        _uiState.value = UiState(
+                            error = UiState.Error.NetworkError,
+                            isLoading = false
+                        )
                     }
-                    _loadingState.value = false
                 }
                 Status.FAILED -> {
                     response.message?.let { message ->
-                        _errorMessage.value = message
+                        _uiState.value = UiState(
+                            error = UiState.Error.UnknownError,
+                            message = message,
+                            isLoading = false
+                        )
+                    } ?: run {
+                        _uiState.value = UiState(
+                            error = UiState.Error.UnknownError,
+                            isLoading = false
+                        )
                     }
-                    _loadingState.value = false
                 }
                 Status.LOADING -> {
-                    _loadingState.value = true
+                    _uiState.value = UiState(
+                        isLoading = true
+                    )
                 }
             }
         }
