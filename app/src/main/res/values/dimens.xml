@@ -9,4 +9,5 @@
     <dimen name="status_indicator_size">12dp</dimen>
     <dimen name="large_text_size">18sp</dimen>
     <dimen name="character_item_margin">8dp</dimen>
+    <dimen name="character_image_width">150dp</dimen>
 </resources>

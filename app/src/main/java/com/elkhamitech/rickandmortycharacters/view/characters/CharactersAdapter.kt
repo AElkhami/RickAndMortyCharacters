@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.elkhamitech.rickandmortycharacters.R
 import com.elkhamitech.rickandmortycharacters.data.model.Character
 import com.elkhamitech.rickandmortycharacters.databinding.ItemCharacterBinding
-import javax.inject.Inject
+
 
 /**
  * Created by A.Elkhami on 01,November,2021
@@ -43,7 +43,14 @@ class CharactersAdapter :
             @JvmStatic
             @BindingAdapter("imageUrl")
             fun setImageUrl(imgView: ImageView, imgUrl: String?) {
-                Glide.with(imgView.context).load(imgView).load(imgUrl).into(imgView)
+                Glide
+                    .with(imgView.context)
+                    .load(imgUrl)
+                    .transform(
+                        CenterCrop(),
+                        GranularRoundedCorners(20f, 0f, 0f, 20f)
+                    )
+                    .into(imgView)
             }
 
             @JvmStatic
@@ -57,7 +64,7 @@ class CharactersAdapter :
                         view.setBackgroundResource(R.drawable.red_circle)
                     }
                     else -> {
-                        view.setBackgroundResource(R.drawable.yellow_circle)
+                        view.setBackgroundResource(R.drawable.orange_circle)
                     }
                 }
             }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="character"
             type="com.elkhamitech.rickandmortycharacters.data.model.Character" />
@@ -18,8 +19,11 @@
         <ImageView
             android:id="@+id/characterImage"
             imageUrl="@{character.image}"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/character_image_width"
+            android:layout_height="@dimen/match_constraint"
+            android:layout_marginStart="@dimen/very_small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/very_small_margin"
             android:contentDescription="@string/character_image"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,10 +38,10 @@
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/very_small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
+            android:text="@{character.name}"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/large_text_size"
             android:textStyle="bold"
-            android:text="@{character.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/characterImage"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,12 +49,12 @@
 
         <View
             android:id="@+id/statusIndicator"
+            characterStatus="@{character.status}"
             android:layout_width="@dimen/status_indicator_size"
             android:layout_height="@dimen/status_indicator_size"
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/very_small_margin"
             android:background="@drawable/green_circle"
-            characterStatus="@{character.status}"
             app:layout_constraintStart_toEndOf="@+id/characterImage"
             app:layout_constraintTop_toBottomOf="@+id/characterName" />
 
@@ -58,12 +62,12 @@
             android:id="@+id/typeAndStatusText"
             android:layout_width="@dimen/match_constraint"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
+            android:text="@{@string/species_and_status(character.species,character.status)}"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/normal_text_size"
             android:textStyle="bold"
-            android:text="@{@string/species_and_status(character.species,character.status)}"
             app:layout_constraintBottom_toBottomOf="@+id/statusIndicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/statusIndicator"
@@ -91,10 +95,10 @@
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/very_small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
+            android:text="@{character.location.name}"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/normal_text_size"
             android:textStyle="bold"
-            android:text="@{character.location.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/characterImage"
             app:layout_constraintTop_toBottomOf="@+id/locationLabel"
@@ -121,11 +125,11 @@
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/very_small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:text="@{character.origin.name}"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/normal_text_size"
             android:textStyle="bold"
-            android:text="@{character.origin.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/characterImage"

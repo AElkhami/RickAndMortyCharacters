@@ -4,4 +4,12 @@
     <color name="rounded_corner_bg_color">#3C3E44</color>
     <color name="secondary_text_color">#B8B8B8</color>
     <color name="main_text_color">#F5F5F5</color>
+
+    <color name="toolbar_color">#3c3e44</color>
+    <color name="primary_color">#66686f</color>
+    <color name="status_bar_color">#16181d</color>
+
+    <color name="secondary_toolbar_color">#ffebc6</color>
+    <color name="secondary_primary_color">#e2ffff</color>
+    <color name="secondary_status_bar_color">#b68967</color>
 </resources>

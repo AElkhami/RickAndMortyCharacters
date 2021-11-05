@@ -4,4 +4,5 @@
     <string name="last_known_location">Last known location:</string>
     <string name="first_seen_in">First seen in:</string>
     <string name="species_and_status">%1$s - %2$s</string>
+    <string name="night_mode_toggle">Night mode toggle</string>
 </resources>
